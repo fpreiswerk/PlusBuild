@@ -216,6 +216,7 @@ OPTION(PLUS_USE_THORLABS_VIDEO "Provide support for the ThorLabs Compact Spectro
 OPTION(PLUS_USE_OpenCV_VIDEO "Provide support for capturing an OpenCV capture stream" OFF)
 OPTION(PLUS_USE_INFRARED_SEEK_CAM "Provide support for capturing an Infrared Seek Camera capture stream" OFF)
 OPTION(PLUS_USE_INFRARED_TEQ1_CAM "Provide support for capturing an Infrared Therma Expert Q1 Camera capture stream" OFF)
+OPTION(PLUS_USE_NISCOPE "Provice support for National Instruments oscilloscopes (NiScope)" ON)
 
 # Tracking hardware
 OPTION(PLUS_USE_OPTITRACK "Provide support for the OptiTrack tracking system" OFF)
@@ -618,6 +619,13 @@ IF(PLUS_USE_OPENHAPTICS)
   FIND_PACKAGE(OpenHaptics)
   IF(NOT OPENHAPTICS_FOUND)
     MESSAGE(FATAL_ERROR "This project requires the OpenHaptics  SDK for supporting the Geomagic Touch devices. One of the components is missing. Please verify configuration or turn off PLUS_USE_OPENHAPTICS.")
+  ENDIF()
+ENDIF()
+
+IF(PLUS_USE_NISCOPE)
+	FIND_PACKAGE(NIScope)
+	IF(NOT NISCOPE_FOUND)
+		MESSAGE(FATAL_ERROR "This project requires the NI Scope SDK. One of the components is missing. Please verify configuration or turn off PLUS_USE_NISCOPE.")
   ENDIF()
 ENDIF()
 
